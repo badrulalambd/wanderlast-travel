@@ -17,6 +17,8 @@ import {
   formatDuration,
   getDestination,
 } from "@/lib/destinations"
+import EditDestinationDialog from "@/components/editdestination/EditDestinationDialog"
+import DeleteDestinationDialog from "@/components/delete-destination/DeleteDestinationDialog"
 
 export const dynamic = "force-dynamic"
 
@@ -70,8 +72,9 @@ export default async function DestinationDetailPage({ params }: Props) {
     )
   }
 
-  const { name, country, price, duration, departureDate, imageUrl, description } =
-    result.destination
+  const { _id, name, country, price, duration, departureDate, imageUrl, description } =
+    result.destination;
+  const destinationData = result.destination;
   const departure = formatDepartureDate(departureDate)
 
   return (
@@ -85,20 +88,12 @@ export default async function DestinationDetailPage({ params }: Props) {
           Back to Destinations
         </Link>
         <div className="flex items-center gap-2">
-          <button
-            type="button"
-            className="inline-flex items-center gap-2 rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50"
-          >
-            <SquarePen className="size-4" aria-hidden="true" />
-            Edit
-          </button>
-          <Link
-            href="/destinations"
-            className="inline-flex items-center gap-2 rounded-md border border-red-300 bg-white px-4 py-2 text-sm font-medium text-red-500 transition-colors hover:bg-red-50"
-          >
-            <Trash2 className="size-4" aria-hidden="true" />
-            Cancel
-          </Link>
+          <EditDestinationDialog 
+          destinationData={destinationData}
+          />
+          <DeleteDestinationDialog 
+          _id={_id}
+          />
         </div>
       </div>
 

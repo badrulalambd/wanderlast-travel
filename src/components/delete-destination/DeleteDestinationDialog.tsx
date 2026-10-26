@@ -1,0 +1,58 @@
+'use client'
+import {
+    AlertDialog,
+    AlertDialogAction,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+    AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+import { Button } from "@/components/ui/button"
+import { Trash2 } from "lucide-react";
+import { redirect } from "next/navigation";
+
+const DeleteDestinationDialog = ({_id}: {_id: string}) => {
+
+    const handleDelete = async () => {
+        const res = await fetch(`http://localhost:5000/destinations/${_id}`, {
+            method: "DELETE",
+            });
+            const resData = await res.json();
+            console.log(resData);
+            if(resData.deletedCount > 0){
+                redirect('/destinations');
+            }
+
+    }
+
+    return (
+        <div>
+            <AlertDialog>
+                <AlertDialogTrigger render={
+                    <Button className="inline-flex items-center gap-2 rounded-md border border-red-300 bg-white px-4 py-2 text-sm font-medium text-red-500 transition-colors hover:bg-red-50">
+                        <Trash2 className="size-4" aria-hidden="true" />
+                        Delete
+                    </Button>
+                } />
+                <AlertDialogContent>
+                    <AlertDialogHeader>
+                        <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                        <AlertDialogDescription>
+                            This action cannot be undone. This will permanently delete your
+                            account from our servers.
+                        </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                        <AlertDialogAction><Button onClick={handleDelete}>Confirm</Button></AlertDialogAction>
+                    </AlertDialogFooter>
+                </AlertDialogContent>
+            </AlertDialog>
+        </div>
+    );
+};
+
+export default DeleteDestinationDialog;
