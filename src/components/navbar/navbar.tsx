@@ -1,13 +1,34 @@
+'use client'
 import Image from "next/image"
 import Link from "next/link"
-import { User } from "lucide-react"
 import { cn } from "cn"
+import { authClient } from "@/lib/auth-client"
+
+//import Popover
+import { Button } from "@/components/ui/button"
+import {
+  Popover,
+  PopoverContent,
+  PopoverDescription,
+  PopoverHeader,
+  PopoverTitle,
+  PopoverTrigger,
+} from "@/components/ui/popover"
+
+//import for avator
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/components/ui/avatar"
+import { redirect, useRouter } from "next/navigation"
+import { use } from "react"
 
 const navLinks = [
   { label: "Home", href: "/", active: true },
   { label: "Destinations", href: "/destinations" },
+  { label: "Add Destination", href: "/add-destination" },
   { label: "My Bookings", href: "/my-bookings" },
-  { label: "Admin", href: "/admin" },
 ]
 
 const accountLinks = [
@@ -16,6 +37,25 @@ const accountLinks = [
 ]
 
 export function Navbar() {
+
+  const { data: session } = authClient.useSession();
+  const user = session?.user;
+  console.log("SessionData from Navbar: ", user);
+
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    const { error } = await authClient.signOut();
+
+    if (error) {
+      console.error("Logout failed:", error);
+      return;
+    }
+
+    router.push("/login");
+    router.refresh();
+  };
+
   return (
     <header className="sticky top-0 z-50 border-b border-gray-200 bg-white">
       <div className="grid h-14 grid-cols-[1fr_auto_1fr] items-center gap-4 px-4 sm:px-6">
@@ -47,22 +87,46 @@ export function Navbar() {
         </Link>
 
         <div className="flex items-center justify-end gap-5 text-sm font-medium text-gray-800">
-          <Link
-            href="/profile"
-            className="hidden items-center gap-1.5 transition-colors hover:text-cyan-600 sm:inline-flex"
-          >
-            <User className="size-4" aria-hidden="true" />
-            Profile
-          </Link>
-          {accountLinks.map(({ label, href }) => (
-            <Link
-              key={label}
-              href={href}
-              className="transition-colors hover:text-cyan-600"
-            >
-              {label}
-            </Link>
-          ))}
+          {
+            user ?
+              <Popover>
+                <PopoverTrigger render={
+                  <Button variant="outline" className="w-fit flex items-center justify-center py-5">
+                    <Avatar>
+                      <AvatarImage
+                        referrerPolicy="no-referrer"
+                        src={user?.image as string}
+                        alt="@shadcn"
+                        className="grayscale"
+                      />
+                      <AvatarFallback>{user?.name.charAt(0)}</AvatarFallback>
+                    </Avatar>
+                    Profile
+                  </Button>} />
+                <PopoverContent align="start">
+                  <PopoverHeader>
+                    <PopoverTitle>{user?.name}</PopoverTitle>
+                    <PopoverDescription>
+                      {user?.email}
+                    </PopoverDescription>
+                    <Button onClick={handleLogout} variant="destructive">Logout</Button>
+                  </PopoverHeader>
+                </PopoverContent>
+              </Popover>
+              :
+              <div className="flex items-center justify-end gap-5 text-sm font-medium text-gray-800">
+                {accountLinks.map(({ label, href }) => (
+                  <Link
+                    key={label}
+                    href={href}
+                    className="transition-colors hover:text-cyan-600"
+                  >
+                    {label}
+                  </Link>
+                ))}
+              </div>
+          }
+
         </div>
       </div>
     </header>

@@ -35,9 +35,9 @@ export function WhyChoose() {
         </div>
 
         <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {features.map(({ icon, title, description }) => (
+          {features.map(({ icon, title, description }, indx) => (
             <article
-              key={title}
+              key={indx}
               className="flex flex-col items-center rounded-xl bg-[#fdf2ee] px-8 py-10 text-center"
             >
               <Image src={icon} alt="" width={44} height={44} className="size-11" />

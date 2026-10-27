@@ -43,16 +43,16 @@ export function AddDestinationForm() {
 
   const update =
     (field: keyof FormState) =>
-    (
-      event: ChangeEvent<
-        HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-      >
-    ) => {
-      const { value } = event.target
-      setForm((prev) => ({ ...prev, [field]: value }))
-      setSubmitted(false)
-      if (field === "category") setCategoryError(false)
-    }
+      (
+        event: ChangeEvent<
+          HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+        >
+      ) => {
+        const { value } = event.target
+        setForm((prev) => ({ ...prev, [field]: value }))
+        setSubmitted(false)
+        if (field === "category") setCategoryError(false)
+      }
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -61,23 +61,23 @@ export function AddDestinationForm() {
       setCategoryError(true)
       return
     }
-    const formData = new FormData(event.currentTarget);
-    const newDestination = Object.fromEntries(formData.entries());
-    console.log("NewDestination Data: ", newDestination);
+    // const formData = new FormData(event.currentTarget);
+    // const newDestination = Object.fromEntries(formData.entries());
+    // console.log("NewDestination Data: ", newDestination);
 
     const res = await fetch(`http://localhost:5000/destinations`, {
       method: "POST",
       headers: {
-        "Content-Type":"application/json",
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(newDestination),
+      body: JSON.stringify(form),
     });
     const resData = await res.json();
     console.log("Data from Server response: ", resData);
-    if(resData.insertedId){
-      redirect('/');
+    if (resData.insertedId) {
+      redirect('/destinations');
     }
-  
+
 
     // Client-only demo: no backend exists yet.
     console.log("FormData for new destination:", form)

@@ -104,8 +104,8 @@ export function Testimonials() {
           </div>
 
           <CarouselContent className="mt-10">
-            {testimonials.map(({ quote, name, location, image }) => (
-              <CarouselItem key={name} className="lg:basis-1/2">
+            {testimonials.map(({ quote, name, location, image }, indx) => (
+              <CarouselItem key={indx} className="lg:basis-1/2">
                 <article className="flex h-full flex-col gap-6 rounded-xl border border-gray-200 bg-white p-6 sm:flex-row">
                   <div className="flex flex-1 flex-col">
                     <p className="text-base leading-relaxed text-gray-900 lg:text-lg">
