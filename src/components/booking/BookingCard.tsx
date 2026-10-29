@@ -35,11 +35,12 @@ const BookingCard = ({ destinationData }: BookingCardProps) => {
         }
         
         const token = await getTokenFromClient();
-        const res = await fetch(`${process.env.DESTINATIONS_API_BASE_URL}/bookings`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_DESTINATIONS_API_BASE_URL}/bookings`, {
+            cache: "no-store",
             method: "POST", 
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`
+                authorization: `Bearer ${token}`
             },
             body: JSON.stringify(bookingData),
         });

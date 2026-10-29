@@ -93,7 +93,7 @@ const EditDestinationDialog = ({destinationData}: editDestinationProp) => {
         console.log("NewDestination Data: ", newDestination);
 
         const token = await getTokenFromClient();
-        const res = await fetch(`${process.env.DESTINATIONS_API_BASE_URL}/destinations/${destinationData._id}`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_DESTINATIONS_API_BASE_URL}/destinations/${destinationData._id}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",

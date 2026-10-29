@@ -32,10 +32,11 @@ const MyBookingCard = ({ myBooking }: { myBooking: Booking }) => {
 
     const handleCancel = async () => {
         const token = await getTokenFromClient();
-        const res = await fetch(`${process.env.DESTINATIONS_API_BASE_URL}/my-bookings/${_id}`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_DESTINATIONS_API_BASE_URL}/my-bookings/${_id}`, {
+            cache: "no-store",
             method: "DELETE",
             headers: {
-                Authorization: `Bearer ${token}`
+                authorization: `Bearer ${token}`
             }
         })
         const resData = await res.json()

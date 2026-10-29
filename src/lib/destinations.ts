@@ -13,7 +13,7 @@ export type Destination = {
   description?: string
 }
 
-const DESTINATIONS_API = `${process.env.DESTINATIONS_API_BASE_URL}/destinations`
+const DESTINATIONS_API = `${process.env.NEXT_PUBLIC_DESTINATIONS_API_BASE_URL}/destinations`
 
 /**
  * Fetches destinations from the external API.
@@ -76,7 +76,7 @@ export type Booking = Destination & {
   bookingDate?: string
 }
 
-const MY_BOOKINGS_API = `${process.env.DESTINATIONS_API_BASE_URL}/my-bookings`
+const MY_BOOKINGS_API = `${process.env.NEXT_PUBLIC_DESTINATIONS_API_BASE_URL}/my-bookings`
 
 /**
  * Fetches the bookings of a user from the external API.

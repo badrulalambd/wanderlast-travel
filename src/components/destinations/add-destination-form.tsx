@@ -68,11 +68,12 @@ export function AddDestinationForm() {
 
    const token = await getTokenFromClient();
 
-    const res = await fetch(`${process.env.DESTINATIONS_API_BASE_URL}/destinations`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_DESTINATIONS_API_BASE_URL}/destinations`, {
+      cache: 'no-store',
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
+        authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(form),
     });
@@ -266,7 +267,7 @@ export function AddDestinationForm() {
           className="h-11 gap-2 rounded-lg bg-cyan-600 px-6 text-white hover:bg-cyan-700"
         >
           <Save aria-hidden="true" />
-          Add Travel Package
+          Add New Destination
         </Button>
       </div>
     </form>
