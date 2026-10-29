@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
 import { redirect } from "next/navigation"
+import { getTokenFromClient } from "@/lib/getTokenClient"
 
 const categories = ["Beach", "Mountain", "City", "Adventure", "Cultural"]
 
@@ -65,10 +66,13 @@ export function AddDestinationForm() {
     // const newDestination = Object.fromEntries(formData.entries());
     // console.log("NewDestination Data: ", newDestination);
 
-    const res = await fetch(`http://localhost:5000/destinations`, {
+   const token = await getTokenFromClient();
+
+    const res = await fetch(`${process.env.DESTINATIONS_API_BASE_URL}/destinations`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(form),
     });

@@ -48,13 +48,23 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { SquarePen } from "lucide-react"
 import { Destination } from "@/lib/destinations"
+import { getTokenFromClient } from "@/lib/getTokenClient"
 
 interface editDestinationProp{
     destinationData: Destination;
 }
 
 const EditDestinationDialog = ({destinationData}: editDestinationProp) => {
-    const [form, setForm] = useState<FormState>(destinationData)
+    const [form, setForm] = useState<FormState>({
+        name: destinationData.name,
+        country: destinationData.country,
+        category: destinationData.category,
+        price: String(destinationData.price ?? ""),
+        duration: destinationData.duration,
+        departureDate: destinationData.departureDate ?? "",
+        imageUrl: destinationData.imageUrl ?? "",
+        description: destinationData.description ?? "",
+    })
     const [submitted, setSubmitted] = useState(false)
     const [categoryError, setCategoryError] = useState(false)
 
@@ -82,10 +92,12 @@ const EditDestinationDialog = ({destinationData}: editDestinationProp) => {
         const newDestination = Object.fromEntries(formData.entries());
         console.log("NewDestination Data: ", newDestination);
 
-        const res = await fetch(`http://localhost:5000/destinations/${destinationData._id}`, {
+        const token = await getTokenFromClient();
+        const res = await fetch(`${process.env.DESTINATIONS_API_BASE_URL}/destinations/${destinationData._id}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
+                authorization: `Bearer ${token}`
             },
             body: JSON.stringify(newDestination),
         });

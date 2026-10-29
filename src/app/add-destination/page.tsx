@@ -1,4 +1,4 @@
-import { AddDestinationForm } from "@/components/add-destination/add-destination-form";
+import { AddDestinationForm } from "@/components/destinations/add-destination-form";
 
 const AddDestinationPage = () => {
     return (
