@@ -7,7 +7,9 @@ import type { Destination } from "@/lib/destinations"
 const FeaturedDestination = async () => {
   let featuredDestinations: Destination[] = []
   try {
-    const res = await fetch(`http://localhost:5000/featured-destination`);
+    const res = await fetch(`${process.env.DESTINATIONS_API_BASE_URL}/featured-destination`, {
+      cache: "no-store"
+    });
     const data: unknown = await res.json();
     featuredDestinations = Array.isArray(data) ? (data as Destination[]) : []
   } catch {
