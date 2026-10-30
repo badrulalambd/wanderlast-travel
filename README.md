@@ -4,6 +4,9 @@ Wanderlast Travel is a full-stack travel booking web application that helps trav
 
 The platform also allows authorized users to add new destination packages with detailed information, images, travel durations, and pricing. Built with Next.js, Node.js, Express.js, MongoDB, and Better Auth, Wanderlast Travel combines modern web technologies to deliver a convenient travel booking experience.
 
+<img width="1000" height="700" alt="wanderlast-travel" src="https://github.com/user-attachments/assets/8095c35c-442d-4fc7-b4da-bb4d846fe764" />
+
+
 ### 🔗 Project Links
 - Live Website: Wanderlast Travel
 - Frontend Repository: wanderlast-travel
