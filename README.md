@@ -22,7 +22,7 @@ The platform also allows authorized users to add new destination packages with d
 - **Express.js** — Building RESTful APIs and handling HTTP requests.
 - **MongoDB** — Storing destination packages and booking information.
 - **Better Auth** — Managing user authentication, sessions, sign-up, and sign-in.
-- 
+
 # ✨ Key Features
 ### 1. 🏛️ Explore Historical Destinations
 - Browse available travel packages on the Home and Destinations pages.
@@ -119,7 +119,7 @@ npm run dev
 
 ### 5. Open the Application
 
-**Visit http://localhost:3000** in your browser to access Wanderlast Travel.
+Visit http://localhost:3000 in your browser to access Wanderlast Travel.
 
 
 
