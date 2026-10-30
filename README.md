@@ -119,7 +119,11 @@ npm run dev
 
 ### 5. Open the Application
 
-Visit http://localhost:3000 in your browser to access Wanderlast Travel.
+Visit 
+```bash
+http://localhost:3000
+```
+in your browser to access Wanderlast Travel.
 
 
 
