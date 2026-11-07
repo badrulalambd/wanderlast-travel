@@ -1,4 +1,4 @@
-# 🌍 Wanderlast Travel
+# 🌍 Wanderlast Travel - Booking Site
 ### Discover Historic Destinations. Plan Your Next Adventure.
 Wanderlast Travel is a full-stack travel booking web application that helps travelers explore historical destinations, discover travel packages, and manage their reservations. Users can browse available destinations, view package details, book trips, and manage their bookings through a simple, responsive interface.
 
