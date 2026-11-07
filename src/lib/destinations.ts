@@ -49,13 +49,9 @@ export type DestinationResult =
  * "not-found"; an unreachable API maps to "unavailable".
  */
 export async function getDestination(id: string): Promise<DestinationResult> {
- const token = await getTokenFromServer();
   try {
     const res = await fetch(`${DESTINATIONS_API}/${id}`, {
       cache: "no-store",
-      headers: {
-        authorization: `Bearer ${token}`,
-      }
     })
     if (!res.ok) return { status: "not-found" }
     const body = await res.text()

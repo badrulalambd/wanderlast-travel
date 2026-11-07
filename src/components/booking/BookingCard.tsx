@@ -1,10 +1,10 @@
 'use client'
 import { authClient } from "@/lib/auth-client";
-import { Destination, formatDepartureDate } from "@/lib/destinations";
+import { Destination } from "@/lib/destinations";
 import { getTokenFromClient } from "@/lib/getTokenClient";
-import { date } from "better-auth";
 import { ArrowRight, Check } from "lucide-react";
-import React, { FormEvent } from "react";
+import Link from "next/link";
+import { FormEvent } from "react";
 
 interface BookingCardProps {
     destinationData: Destination;
@@ -30,14 +30,14 @@ const BookingCard = ({ destinationData }: BookingCardProps) => {
             username: user?.name,
             email: user?.email,
             ...destinationData,
-            departureDate: newDate.departureDate, 
+            departureDate: newDate.departureDate,
             bookingDate: new Date(),
         }
-        
+
         const token = await getTokenFromClient();
         const res = await fetch(`${process.env.NEXT_PUBLIC_DESTINATIONS_API_BASE_URL}/bookings`, {
             cache: "no-store",
-            method: "POST", 
+            method: "POST",
             headers: {
                 'Content-Type': 'application/json',
                 authorization: `Bearer ${token}`
